@@ -8,12 +8,12 @@ See the [issue](https://github.com/facebook/jest/issues/3322) that inspired this
 
 By default it prints the detailed failure messages and the summary of the failed tests.
 
-Add `jest-summary-reporter` in addition to default reporters that Jest provides:
+Add `@geoblink/jest-summary-reporter` in addition to default reporters that Jest provides:
 ```
 {
   "reporters": [
     "default",
-    "jest-summary-reporter"
+    "@geoblink/jest-summary-reporter"
   ]
 }
 ```
@@ -23,7 +23,7 @@ If you want to see passing/pending tests as well:
 {
   "reporters": [
     "default",
-    ["jest-summary-reporter", {"failuresOnly": false}]
+    ["@geoblink/jest-summary-reporter", {"failuresOnly": false}]
   ]
 }
 ```
@@ -33,7 +33,7 @@ If you want to omit the detailed failure messages:
 {
   "reporters": [
     "default",
-    ["jest-summary-reporter", {"shouldPrintFailureMessages": false}]
+    ["@geoblink/jest-summary-reporter", {"shouldPrintFailureMessages": false}]
   ]
 }
 ```
