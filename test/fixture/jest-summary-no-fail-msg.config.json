@@ -3,6 +3,6 @@
   "testMatch": ["<rootDir>/test/fixture/*.test.js"],
   "reporters": [
     "default",
-    ["./index", {"failuresOnly": false, "shouldPrintFailureMessages": false}]
+    ["./index", {"shouldPrintFailureMessages": false}]
   ]
 }

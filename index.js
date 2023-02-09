@@ -21,9 +21,10 @@ class SummaryReporter {
    * @param {*} globalConfig 
    * @param {*} options 
    */
-  constructor({rootDir}, {failuresOnly=true}={}) {
+  constructor({rootDir}, {failuresOnly=true, shouldPrintFailureMessages=true}={}) {
     this._rootDir = rootDir;
     this._failuresOnly = failuresOnly;
+    this._shouldPrintFailureMessages = shouldPrintFailureMessages;
     this._indent = INDENT;
     this._path = [];
   }
@@ -33,6 +34,26 @@ class SummaryReporter {
   }
 
   onRunComplete(contexts, results) {
+    if (this._shouldPrintFailureMessages) {
+      this.printFailureMessages(results);
+    }
+    this.printSummary(results);
+  }
+
+  printFailureMessages(results) {
+    if (results.numFailedTestSuites == 0) return;
+    this.log('');
+    this.log(summaryLineStyle('Failure messages'));
+    this.log('');
+    for (let file of this.sortResults(results.testResults)) {
+      if (!file.numFailingTests || !file.failureMessage) continue;
+      this.resetPath();
+      this.log(fileStyle(relative(this._rootDir, file.testFilePath)));
+      this.log(file.failureMessage);
+    }
+  }
+
+  printSummary(results) {
     this.log('');
     this.log(summaryLineStyle(this.summaryLine(results)));
     this.log('');
