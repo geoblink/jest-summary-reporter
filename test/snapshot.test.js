@@ -30,7 +30,7 @@ function fuzzOutput(output) {
     return output.replace(/[\s\S]+Ran all test suites.*?$/m, '');
 }
 
-describe('with default configuration', async () => {
+describe('with default configuration', () => {
     it('runs tests showing failures at end', async () => {
         const result = await runJest('jest-summary.config.json');
         expect(result).toMatchSnapshot();
@@ -40,13 +40,13 @@ describe('with default configuration', async () => {
         expect(result).toMatchSnapshot();
     });    
 });
-describe('with failuresOnly=false configuration', async () => {
+describe('with failuresOnly=false configuration', () => {
     it('runs tests showing all tests at end', async () => {
         const result = await runJest('jest-summary-all.config.json');
         expect(result).toMatchSnapshot();
     });
 });
-describe('when misconfigured to be only reporter', async () => {
+describe('when misconfigured to be only reporter', () => {
     it('runs tests and returns code=1', async () => {
         const result = await runJest('jest-summary-only.config.json');
         expect(result).toMatchSnapshot();
