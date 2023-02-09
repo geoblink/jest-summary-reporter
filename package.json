@@ -1,14 +1,17 @@
 {
-  "name": "jest-summary-reporter",
-  "version": "0.0.2",
+  "name": "@geoblink/jest-summary-reporter",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jest"
   },
   "keywords": [],
-  "author": "tony@lownds.com",
-  "repository": "tln/jest-summary-reporter",
+  "authors": [
+    "tony@lownds.com",
+    "Geoblink"
+  ],
+  "repository": "geoblink/jest-summary-reporter",
   "license": "MIT",
   "devDependencies": {
     "jest": "^22.4.3"
