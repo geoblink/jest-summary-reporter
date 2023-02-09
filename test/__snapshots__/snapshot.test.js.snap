@@ -22,23 +22,81 @@ test/fixture/fail2.test.js
 }
 `;
 
-exports[`with default configuration final message indicates when tests all pass 1`] = `
-Object {
-  "code": 0,
-  "stderr": "
-
-All tests passed
-
-
-",
-  "stdout": "",
-}
-`;
-
-exports[`with default configuration runs tests showing failures at end 1`] = `
+exports[`with default configuration runs tests showing failures and their messages at end 1`] = `
 Object {
   "code": 1,
   "stderr": "
+
+Failure messages
+
+test/fixture/fail.test.js
+  ● fails
+
+    expect(received).toEqual(expected) // deep equality
+
+    Expected: 2
+    Received: 1
+
+      1 | it('fails', () => {
+    > 2 |   expect(1).toEqual(2);
+        |             ^
+      3 | });
+      4 | it('passes', () => {
+      5 |   expect(2).toEqual(2);
+
+      at Object.<anonymous> (test/fixture/fail.test.js:2:13)
+
+  ● nested › deeply nested › fails
+
+    expect(received).toEqual(expected) // deep equality
+
+    Expected: 1
+    Received: 2
+
+      17 |     });
+      18 |     it('fails', () => {
+    > 19 |       expect(2).toEqual(1);
+         |                 ^
+      20 |     });
+      21 |   });
+      22 | });
+
+      at Object.<anonymous> (test/fixture/fail.test.js:19:17)
+
+test/fixture/fail2.test.js
+  ● fails
+
+    expect(received).toEqual(expected) // deep equality
+
+    Expected: 2
+    Received: 1
+
+      1 | it('fails', () => {
+    > 2 |   expect(1).toEqual(2);
+        |             ^
+      3 | });
+      4 | it('passes', () => {
+      5 |   expect(2).toEqual(2);
+
+      at Object.<anonymous> (test/fixture/fail2.test.js:2:13)
+
+  ● nested › deeply nested › fails
+
+    expect(received).toEqual(expected) // deep equality
+
+    Expected: 1
+    Received: 2
+
+      17 |     });
+      18 |     it('fails', () => {
+    > 19 |       expect(2).toEqual(1);
+         |                 ^
+      20 |     });
+      21 |   });
+      22 | });
+
+      at Object.<anonymous> (test/fixture/fail2.test.js:19:17)
+
 
 Summary of failed tests
 
@@ -58,7 +116,7 @@ test/fixture/fail2.test.js
 }
 `;
 
-exports[`with failuresOnly=false configuration runs tests showing all tests at end 1`] = `
+exports[`with failuresOnly=false and shouldPrintFailureMessages=false configuration runs tests showing all tests at end 1`] = `
 Object {
   "code": 1,
   "stderr": "
@@ -84,6 +142,42 @@ test/fixture/fail2.test.js
   nested
     deeply nested
       ✓ passes
+      ✕ fails
+
+",
+  "stdout": "",
+}
+`;
+
+exports[`with shouldPrintFailureMessages=false configuration final message indicates when tests all pass 1`] = `
+Object {
+  "code": 0,
+  "stderr": "
+
+All tests passed
+
+
+",
+  "stdout": "",
+}
+`;
+
+exports[`with shouldPrintFailureMessages=false configuration runs tests showing failures at end 1`] = `
+Object {
+  "code": 1,
+  "stderr": "
+
+Summary of failed tests
+
+test/fixture/fail.test.js
+  ✕ fails
+  nested
+    deeply nested
+      ✕ fails
+test/fixture/fail2.test.js
+  ✕ fails
+  nested
+    deeply nested
       ✕ fails
 
 ",

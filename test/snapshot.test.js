@@ -30,23 +30,29 @@ function fuzzOutput(output) {
     return output.replace(/[\s\S]+Ran all test suites.*?$/m, '');
 }
 
-describe('with default configuration', async () => {
-    it('runs tests showing failures at end', async () => {
+describe('with default configuration', () => {
+    it('runs tests showing failures and their messages at end', async () => {
         const result = await runJest('jest-summary.config.json');
+        expect(result).toMatchSnapshot();
+    });
+});
+describe('with shouldPrintFailureMessages=false configuration', () => {
+    it('runs tests showing failures at end', async () => {
+        const result = await runJest('jest-summary-no-fail-msg.config.json');
         expect(result).toMatchSnapshot();
     });    
     it('final message indicates when tests all pass', async () => {
-        const result = await runJest('jest-summary.config.json', '-t', 'pass');
+        const result = await runJest('jest-summary-no-fail-msg.config.json', '-t', 'pass');
         expect(result).toMatchSnapshot();
     });    
 });
-describe('with failuresOnly=false configuration', async () => {
+describe('with failuresOnly=false and shouldPrintFailureMessages=false configuration', () => {
     it('runs tests showing all tests at end', async () => {
         const result = await runJest('jest-summary-all.config.json');
         expect(result).toMatchSnapshot();
     });
 });
-describe('when misconfigured to be only reporter', async () => {
+describe('when misconfigured to be only reporter', () => {
     it('runs tests and returns code=1', async () => {
         const result = await runJest('jest-summary-only.config.json');
         expect(result).toMatchSnapshot();

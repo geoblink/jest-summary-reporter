@@ -2,6 +2,6 @@
   "rootDir": "../..",
   "testMatch": ["<rootDir>/test/fixture/*.test.js"],
   "reporters": [
-    "./index"
+    ["./index", {"shouldPrintFailureMessages": false}]
   ]
 }
